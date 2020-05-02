@@ -1,5 +1,6 @@
 package wasteed.project.gamejamproject.map;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Tower {
@@ -9,17 +10,59 @@ public class Tower {
     // интерфейся для взаимодействия башни с доской
     private final ClientBoard board;
     // территория, принадлежащая башне
-    private final Territory territory;
+    private final ArrayList<Cell> territory;
     // владелец башни
     private final Player owner;
 
-    public Tower(BoardConfig config, ClientBoard board, Player owner) {
+    public Tower(ClientBoard board, Cell towerCell) {
         this.board = board;
-        this.owner = owner;
+        this.owner = towerCell.getOwner();
         Random random = new Random();
-        x = random.nextInt(config.getWidth());
-        y = random.nextInt(config.getHeight());
-        territory = new PlayersTerritory(config, x, y);
+        x = towerCell.getX();
+        y = towerCell.getY();
+        territory = new ArrayList<>(1);
+        territory.add(towerCell);
+    }
+
+    // принадлежит ли клетка территории
+
+    public boolean belongs(int x, int y) {
+        return false;
+    }
+    // присоединить клетку
+
+    void join(Cell cell) {
+
+        // TODO: 02.05.2020
+    }
+    // отсоединить клетку
+
+    void lose(Cell cell) {
+        if (!belongs(x, y)) {
+            throw new IllegalArgumentException();
+            // TODO: 02.05.2020 CustomException
+        }
+        // TODO: 02.05.2020
+    }
+    // сделать ход с проверкой под себя
+
+    public void makeMove(Move move) {
+        check(move.getX(), move.getY());
+        board.makeMove(move);
+    }
+    private void check(int x, int y) {
+        if (belongs(x, y)) {
+            throw new IllegalArgumentException();
+            // TODO: 02.05.2020 CustomException
+        }
+    }
+
+    Player getOwner() {
+        return owner;
+    }
+
+    public int getSize() {
+        return territory.size();
     }
 
     public int getX() {
@@ -28,46 +71,5 @@ public class Tower {
 
     public int getY() {
         return y;
-    }
-
-    // принадлежит ли клетка территории
-    public boolean belongs(int x, int y) {
-        return territory.belongs(x, y);
-    }
-
-    // присоединить клетку
-    public void join(int x, int y) {
-        check(x, y);
-        territory.join(x, y);
-    }
-
-    // отсоединить клетку
-    public void lose(int x, int y) {
-        if (!belongs(x, y)) {
-            throw new IllegalArgumentException();
-            // TODO: 02.05.2020 CustomException
-        }
-        territory.lose(x, y);
-    }
-
-    // сделать ход с проверкой под себя
-    public void makeMove(Move move) {
-        check(move.getX(), move.getY());
-        board.makeMove(move);
-    }
-
-    private void check(int x, int y) {
-        if (belongs(x, y)) {
-            throw new IllegalArgumentException();
-            // TODO: 02.05.2020 CustomException
-        }
-    }
-
-    public Player getOwner() {
-        return owner;
-    }
-
-    public int getSize() {
-        return territory.getSize();
     }
 }
