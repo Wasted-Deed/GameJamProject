@@ -8,9 +8,15 @@ import java.util.ArrayList;
 
 import wasteed.project.gamejamproject.IsInteractive;
 import wasteed.project.gamejamproject.Player;
+import wasteed.project.gamejamproject.map.Board;
+import wasteed.project.gamejamproject.map.Cell;
+import wasteed.project.gamejamproject.map.Flag;
+import wasteed.project.gamejamproject.map.Pair;
 
 public class GameField implements IsInteractive {
     public static int CURRENT_PROGRESS;
+
+    private Board map;
 
     private final int MAP_X;
     private final int MAP_Y;
@@ -32,10 +38,12 @@ public class GameField implements IsInteractive {
         heroMoney = ResourceLoader.getBitmap(ResourceLoader.Image.MONEY);
         heroArmy = ResourceLoader.getBitmap(ResourceLoader.Image.ARMY);
         heroPeople = ResourceLoader.getBitmap(ResourceLoader.Image.PEOPLE);
+        generateBasicSituation();
     }
 
     private void generateBasicSituation() {
-
+        players.add(hero);
+        map = new Board(new Pair(MAP_X, MAP_Y), players, null);
     }
 
     @Override
@@ -47,6 +55,11 @@ public class GameField implements IsInteractive {
         canvas.drawBitmap(heroArmy, m, null);
         m.setTranslate(ThreadSolver.SCREEN_WIDTH - 200, 0);
         canvas.drawBitmap(heroPeople, m, null);
+        Cell[][] cells = map.getCells();
+        for (int i = 0; i < MAP_X; i++) {
+            for (int j = 0; j < MAP_Y; j++) {
+            }
+        }
     }
 
     private void solveHero() {

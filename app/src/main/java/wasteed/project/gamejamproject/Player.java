@@ -2,7 +2,10 @@ package wasteed.project.gamejamproject;
 
 import android.graphics.Canvas;
 
-public class Player implements IsInteractive{
+import wasteed.project.gamejamproject.map.Move;
+import wasteed.project.gamejamproject.map.Tower;
+
+public class Player implements IsInteractive {
     @Override
     public void draw(Canvas canvas) {
 
@@ -10,6 +13,14 @@ public class Player implements IsInteractive{
 
     @Override
     public void update() {
+
+    }
+
+    public void setTower(Tower tower) {
+
+    }
+
+    public void makeMove(Move move) {
 
     }
 }

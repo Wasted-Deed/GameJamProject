@@ -1,11 +1,12 @@
 package wasteed.project.gamejamproject.map;
 
+import android.graphics.Canvas;
+
 import java.util.ArrayList;
 import java.util.Random;
 
-import android.graphics.Canvas;
-
 import wasteed.project.gamejamproject.IsInteractive;
+import wasteed.project.gamejamproject.Player;
 
 
 // Основной класс доски/карты
@@ -39,7 +40,7 @@ public class Board implements ServerBoard, IsInteractive {
             int x = random.nextInt(config.getY());
             int y = random.nextInt(config.getX());
             cells[x][y] = new Cell(CellState.Taken, player, x, y);
-            Tower tower = new Tower(this, cells[x][y], flag);
+            Tower tower = new Tower(this, cells[x][y]);
             towers.add(tower);
             player.setTower(tower);
         }
@@ -52,9 +53,12 @@ public class Board implements ServerBoard, IsInteractive {
         MoveType type = move.getType();
         CellState cellState = cells[move.getX()][move.getY()].getState();
         switch (cellState) {
-            case Empty : return type == MoveType.Take;
-            case Taken : return type == MoveType.Fight;
-            default : return false;
+            case Empty:
+                return type == MoveType.Take;
+            case Taken:
+                return type == MoveType.Fight;
+            default:
+                return false;
         }
     }
 
@@ -130,5 +134,9 @@ public class Board implements ServerBoard, IsInteractive {
     @Override
     public void update() {
 
+    }
+
+    public Cell[][] getCells() {
+        return cells;
     }
 }

@@ -1,6 +1,8 @@
 package wasteed.project.gamejamproject.map;
 
-class Cell {
+import wasteed.project.gamejamproject.Player;
+
+public class Cell {
     private CellState state;
     private Player owner;
     private int x;

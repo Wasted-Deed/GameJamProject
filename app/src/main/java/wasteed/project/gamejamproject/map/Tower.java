@@ -2,6 +2,8 @@ package wasteed.project.gamejamproject.map;
 
 import java.util.ArrayList;
 
+import wasteed.project.gamejamproject.Player;
+
 public class Tower {
     // координаты башни на поле
     private final int x;
@@ -67,5 +69,9 @@ public class Tower {
 
     public int getY() {
         return y;
+    }
+
+    public Flag getFLAG() {
+        return FLAG;
     }
 }
