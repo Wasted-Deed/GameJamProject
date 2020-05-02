@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import wasteed.project.gamejamproject.maintenance.ResourceLoader;
+import wasteed.project.gamejamproject.maintenance.ThreadSolver;
+
 public class MainActivity extends Activity {
 
     @Override
@@ -25,7 +28,7 @@ public class MainActivity extends Activity {
     }
 
     private void start() {
-        //ResourcesLoader.loadResources(getResources());
+        ResourceLoader.loadResources(getResources());
         ThreadSolver solver = new ThreadSolver(this);
         setContentView(solver);
     }

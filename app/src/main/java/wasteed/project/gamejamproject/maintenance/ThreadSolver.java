@@ -1,4 +1,4 @@
-package wasteed.project.gamejamproject;
+package wasteed.project.gamejamproject.maintenance;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -7,6 +7,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
+
+import wasteed.project.gamejamproject.Layout;
 
 public class ThreadSolver extends SurfaceView implements SurfaceHolder.Callback {
     public static Vector2 TOUCH;

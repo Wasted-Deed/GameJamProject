@@ -1,8 +1,11 @@
-package wasteed.project.gamejamproject;
+package wasteed.project.gamejamproject.maintenance;
 
 import android.graphics.Canvas;
 
 import java.util.ArrayList;
+
+import wasteed.project.gamejamproject.IsInteractive;
+import wasteed.project.gamejamproject.Player;
 
 public class GameField implements IsInteractive {
     private final int MAP_X;

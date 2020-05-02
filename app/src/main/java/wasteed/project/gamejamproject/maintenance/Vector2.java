@@ -1,4 +1,4 @@
-package wasteed.project.gamejamproject;
+package wasteed.project.gamejamproject.maintenance;
 
 public class Vector2 {
     private float x;

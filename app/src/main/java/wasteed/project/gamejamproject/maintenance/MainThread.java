@@ -1,4 +1,4 @@
-package wasteed.project.gamejamproject;
+package wasteed.project.gamejamproject.maintenance;
 
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
