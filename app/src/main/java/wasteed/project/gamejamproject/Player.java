@@ -23,4 +23,8 @@ public class Player implements IsInteractive {
     public void makeMove(Move move) {
 
     }
+
+    public Tower getTower() {
+        return null;
+    }
 }

@@ -56,8 +56,29 @@ public class GameField implements IsInteractive {
         m.setTranslate(ThreadSolver.SCREEN_WIDTH - 200, 0);
         canvas.drawBitmap(heroPeople, m, null);
         Cell[][] cells = map.getCells();
+        int stepY = 200;
         for (int i = 0; i < MAP_X; i++) {
             for (int j = 0; j < MAP_Y; j++) {
+                Bitmap cell;
+                //if (i % 2 == 0) //{
+                    m.setTranslate(i * 54, stepY + j * 60);
+                //} else {
+                //  m.setTranslate(i * 54 + 27, stepY + j * 60);
+                //}
+                if (map.getTower(i, j) == null) {
+                    cell = ResourceLoader.getBitmap(ResourceLoader.Image.CELL_GRAY);
+                    canvas.drawBitmap(cell, m, null);
+                    continue;
+                }
+                Flag flag = map.getTower(i, j).getFLAG();
+                if (flag == Flag.Red) {
+                    cell = ResourceLoader.getBitmap(ResourceLoader.Image.CELL_RED);
+                } else if (flag == Flag.Blue) {
+                    cell = ResourceLoader.getBitmap(ResourceLoader.Image.CELL_BLUE);
+                } else {
+                    cell = ResourceLoader.getBitmap(ResourceLoader.Image.CELL_GREEN);
+                }
+                canvas.drawBitmap(cell, m, null);
             }
         }
     }
