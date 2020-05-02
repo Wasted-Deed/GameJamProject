@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import wasteed.project.gamejamproject.map.Move;
 import wasteed.project.gamejamproject.map.Tower;
 
-public class Player implements IsInteractive {
+public class Player extends UnitInterface {
     @Override
     public void draw(Canvas canvas) {
 

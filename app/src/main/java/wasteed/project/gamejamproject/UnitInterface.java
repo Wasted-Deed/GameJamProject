@@ -30,4 +30,29 @@ public class UnitInterface implements IsInteractive {
     public void update() {
 
     }
+
+    protected int getArmy() {
+        return army;
+    }
+
+    protected int getMoney() {
+        return money;
+    }
+
+    protected int getPeople() {
+        return people;
+    }
+
+    protected void setArmy(int army) {
+        this.army = army;
+    }
+
+    protected void setMoney(int money) {
+        this.money = money;
+    }
+
+    protected void setPeople(int people) {
+        this.people = people;
+    }
+
 }
