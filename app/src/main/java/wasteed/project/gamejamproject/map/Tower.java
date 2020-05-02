@@ -17,19 +17,20 @@ public class Tower {
     // flag
     private final Flag FLAG;
 
-    public Tower(ClientBoard board, Cell towerCell) {
+    public Tower(ClientBoard board, Cell towerCell, Player owner) {
         this.board = board;
-        this.owner = towerCell.getOwner();
+        this.owner = owner;
         x = towerCell.getX();
         y = towerCell.getY();
         FLAG = Flag.randomFlag();
         territory = new ArrayList<>(1);
         territory.add(towerCell);
+        towerCell.setOwner(this);
     }
 
     // принадлежит ли клетка территории
     public boolean belongs(int x, int y) {
-        return owner.equals(board.getOwner(x, y));
+        return this.equals(board.getTower(x, y));
     }
 
     // присоединить клетку

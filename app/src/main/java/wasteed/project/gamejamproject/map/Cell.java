@@ -1,14 +1,12 @@
 package wasteed.project.gamejamproject.map;
 
-import wasteed.project.gamejamproject.Player;
-
 public class Cell {
     private CellState state;
-    private Player owner;
+    private Tower owner;
     private int x;
     private int y;
 
-    Cell(CellState state, Player owner, int x, int y) {
+    Cell(CellState state, Tower owner, int x, int y) {
         this.state = state;
         this.owner = owner;
         this.x = x;
@@ -19,7 +17,7 @@ public class Cell {
         return state;
     }
 
-    Player getOwner() {
+    Tower getTower() {
         return owner;
     }
 
@@ -35,7 +33,7 @@ public class Cell {
         this.state = state;
     }
 
-    public void setOwner(Player owner) {
+    public void setOwner(Tower owner) {
         this.owner = owner;
     }
 }
