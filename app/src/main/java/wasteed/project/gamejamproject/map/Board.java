@@ -7,9 +7,6 @@ import android.graphics.Canvas;
 
 import wasteed.project.gamejamproject.IsInteractive;
 
-// TODO: 02.05.2020 enum flag
-// TODO: 02.05.2020 owners on cells
-// TODO: 02.05.2020 list of cells
 
 // Основной класс доски/карты
 public class Board implements ServerBoard, IsInteractive {
@@ -42,7 +39,7 @@ public class Board implements ServerBoard, IsInteractive {
             int x = random.nextInt(config.getY());
             int y = random.nextInt(config.getX());
             cells[x][y] = new Cell(CellState.Taken, player, x, y);
-            Tower tower = new Tower(this, cells[x][y]);
+            Tower tower = new Tower(this, cells[x][y], flag);
             towers.add(tower);
             player.setTower(tower);
         }
@@ -118,6 +115,11 @@ public class Board implements ServerBoard, IsInteractive {
                 cells[i][j] = new Cell(CellState.Empty, null, i, j);
             }
         }
+    }
+
+    @Override
+    public Player getOwner(int x, int y) {
+        return cells[x][y].getOwner();
     }
 
     @Override

@@ -1,7 +1,6 @@
 package wasteed.project.gamejamproject.map;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Tower {
     // координаты башни на поле
@@ -13,43 +12,40 @@ public class Tower {
     private final ArrayList<Cell> territory;
     // владелец башни
     private final Player owner;
+    // flag
+    private final Flag FLAG;
 
     public Tower(ClientBoard board, Cell towerCell) {
         this.board = board;
         this.owner = towerCell.getOwner();
-        Random random = new Random();
         x = towerCell.getX();
         y = towerCell.getY();
+        FLAG = Flag.randomFlag();
         territory = new ArrayList<>(1);
         territory.add(towerCell);
     }
 
     // принадлежит ли клетка территории
-
     public boolean belongs(int x, int y) {
-        return false;
+        return owner.equals(board.getOwner(x, y));
     }
+
     // присоединить клетку
-
     void join(Cell cell) {
-
-        // TODO: 02.05.2020
+        territory.add(cell);
     }
+
     // отсоединить клетку
-
     void lose(Cell cell) {
-        if (!belongs(x, y)) {
-            throw new IllegalArgumentException();
-            // TODO: 02.05.2020 CustomException
-        }
-        // TODO: 02.05.2020
+        territory.remove(cell);
     }
-    // сделать ход с проверкой под себя
 
+    // сделать ход с проверкой под себя
     public void makeMove(Move move) {
         check(move.getX(), move.getY());
         board.makeMove(move);
     }
+
     private void check(int x, int y) {
         if (belongs(x, y)) {
             throw new IllegalArgumentException();
