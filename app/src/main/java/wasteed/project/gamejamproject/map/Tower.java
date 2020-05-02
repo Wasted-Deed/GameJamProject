@@ -56,7 +56,7 @@ public class Tower {
         }
     }
 
-    Player getOwner() {
+    public Player getOwner() {
         return owner;
     }
 
