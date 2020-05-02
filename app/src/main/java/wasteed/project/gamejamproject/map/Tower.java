@@ -75,4 +75,8 @@ public class Tower {
     public Flag getFLAG() {
         return FLAG;
     }
+
+    public ArrayList<Cell> getTerritory() {
+        return territory;
+    }
 }

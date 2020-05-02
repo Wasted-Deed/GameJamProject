@@ -36,8 +36,11 @@ public class Board implements ServerBoard, IsInteractive {
     private void setTowers(ArrayList<Player> players) {
         towers = new ArrayList<>(players.size());
         Random random = new Random();
+        int step = config.getX() / players.size();
+        int lay = 0;
         for (Player player : players) {
-            int x = random.nextInt(config.getY());
+            int x = random.nextInt(step) + lay;
+            lay += step;
             int y = random.nextInt(config.getX());
             cells[x][y] = new Cell(CellState.Taken, null, x, y);
             Tower tower = new Tower(this, cells[x][y], player);
