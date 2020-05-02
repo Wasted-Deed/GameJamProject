@@ -39,8 +39,8 @@ public class Board implements ServerBoard, IsInteractive {
         for (Player player : players) {
             int x = random.nextInt(config.getY());
             int y = random.nextInt(config.getX());
-            cells[x][y] = new Cell(CellState.Taken, player, x, y);
-            Tower tower = new Tower(this, cells[x][y]);
+            cells[x][y] = new Cell(CellState.Taken, null, x, y);
+            Tower tower = new Tower(this, cells[x][y], player);
             towers.add(tower);
             player.setTower(tower);
         }
@@ -66,14 +66,14 @@ public class Board implements ServerBoard, IsInteractive {
     @Override
     public void takeCell(int x, int y) {
         cells[x][y].setState(CellState.Taken);
-        cells[x][y].setOwner(currentTower().getOwner());
+        cells[x][y].setOwner(currentTower());
         currentTower().join(cells[x][y]);
     }
 
     // поборотся за клетку
     @Override
     public void fightCell(int x, int y) {
-        cells[x][y].setOwner(battleInterface.fight(currentTower().getOwner(), cells[x][y].getOwner(), x, y));
+        cells[x][y].setOwner(battleInterface.fight(currentTower().getOwner(), getTower(x, y).getOwner(), x, y).getTower());
     }
 
     // просрать клетку
@@ -122,8 +122,8 @@ public class Board implements ServerBoard, IsInteractive {
     }
 
     @Override
-    public Player getOwner(int x, int y) {
-        return cells[x][y].getOwner();
+    public Tower getTower(int x, int y) {
+        return cells[x][y].getTower();
     }
 
     @Override
