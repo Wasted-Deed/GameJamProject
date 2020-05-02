@@ -2,7 +2,7 @@ package wasteed.project.gamejamproject;
 
 import android.graphics.Canvas;
 
-public class GameField {
+public class GameField implements IsInteractive {
     private final int MAP_X;
     private final int MAP_Y;
 
@@ -11,11 +11,13 @@ public class GameField {
         this.MAP_Y = MAP_Y;
     }
 
-    public void update() {
-
+    @Override
+    public void draw(Canvas canvas) {
+        
     }
 
-    public void draw(Canvas canvas) {
+    @Override
+    public void update() {
 
     }
 }
