@@ -56,7 +56,7 @@ public class Tower {
         }
     }
 
-    Player getOwner() {
+    public Player getOwner() {
         return owner;
     }
 
@@ -74,5 +74,9 @@ public class Tower {
 
     public Flag getFLAG() {
         return FLAG;
+    }
+
+    public ArrayList<Cell> getTerritory() {
+        return territory;
     }
 }
