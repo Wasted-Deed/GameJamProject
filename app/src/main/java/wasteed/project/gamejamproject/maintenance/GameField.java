@@ -92,7 +92,7 @@ public class GameField implements IsInteractive {
         if (ThreadSolver.IS_TOUCHING) {
             Cell[][] cs = map.getCells();
             if (x >= 0 && x < cs.length &&
-                    y >= 0 && y < cs[0].length) {
+                    y >= 0 && y < cs[0].length && cs[x][y].getTower() == null) {
                 map.makeMove(new Move(x, y, MoveType.Take), hero.getTower());
                 hasFinished = true;
                 //if (map.getTower())

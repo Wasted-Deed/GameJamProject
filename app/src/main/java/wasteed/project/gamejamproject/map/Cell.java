@@ -17,7 +17,7 @@ public class Cell {
         return state;
     }
 
-    Tower getTower() {
+    public Tower getTower() {
         return owner;
     }
 
