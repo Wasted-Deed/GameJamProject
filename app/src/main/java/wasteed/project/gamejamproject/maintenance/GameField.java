@@ -87,7 +87,7 @@ public class GameField implements IsInteractive {
     private void solveHero() {
         int x = (int) ThreadSolver.TOUCH.getX();
         int y = (int) ThreadSolver.TOUCH.getY();
-        if (!hasEarnedPoints) {
+        if (!hasEarnedPoints && ThreadSolver.IS_TOUCHING) {
             hasEarnedPoints = hero.getUnitInterface().toGain(x, y);
         }
         x /= 54;
@@ -122,6 +122,7 @@ public class GameField implements IsInteractive {
             }
 
             hasFinished = false;
+            hasEarnedPoints = false;
         } else {
             solveHero();
         }
