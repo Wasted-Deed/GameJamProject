@@ -143,4 +143,9 @@ public class Board implements ServerBoard, IsInteractive {
     public Cell[][] getCells() {
         return cells;
     }
+
+    @Override
+    public Pair getConfig() {
+        return config;
+    }
 }
