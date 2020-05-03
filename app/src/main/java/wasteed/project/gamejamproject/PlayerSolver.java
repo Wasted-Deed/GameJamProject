@@ -37,19 +37,20 @@ public class PlayerSolver {
                 int x = xs + dd.get(j).getX();
                 int y = ys + dd.get(j).getY();
                 Move move = new Move(x, y, MoveType.Fight);
-                if (board.isValid(move) && board.getTower(x, y) != tower) {
+                if (tower.isValid(x, y) && board.getTower(x, y) != tower) {
                     if (board.getTower(x, y) == null) {
                         Move movef = new Move(x, y, MoveType.Take);
-                        board.makeMove(movef);
+                        tower.makeMove(movef);
                     } else {
                         Player opponent = board.getTower(x, y).getOwner();
                         if (opponent.getUnitInterface().getArmy() < player.getUnitInterface().getArmy()) {
-                            board.makeMove(move);
+                            tower.makeMove(move);
                             player.getUnitInterface().setArmy(player.getUnitInterface().getArmy() - opponent.getUnitInterface().getArmy());
-                            isEnd = true;
-                            break;
+
                         }
                     }
+                    isEnd = true;
+                    break;
                 }
             }
             if (isEnd) {
