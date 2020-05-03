@@ -28,7 +28,7 @@ public class GameField implements IsInteractive {
     private ArrayList<Player> players;
     private Player hero;
     private boolean hasFinished;
-
+    private boolean hasEarnedPoints;
 
     public GameField(int MAP_X, int MAP_Y) {
         this.MAP_X = MAP_X;
@@ -37,6 +37,7 @@ public class GameField implements IsInteractive {
         hero = new Player();
         CURRENT_PROGRESS = 0;
         hasFinished = true;
+        hasEarnedPoints = false;
         generateBasicSituation();
     }
 
