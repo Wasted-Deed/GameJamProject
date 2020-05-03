@@ -42,12 +42,12 @@ public class PlayerSolver {
                         if (board.getTower(x, y) == null) {
                             Move movef = new Move(x, y, MoveType.Take);
                             tower.makeMove(movef);
-                            sb.append(tower.getFLAG() + " take point" + x + " " + y);
+                            sb.append(tower.getFLAG() + " takes point(" + x + ", " + y + ")");
                         } else {
                             Player opponent = board.getTower(x, y).getOwner();
                             if (opponent.getUnitInterface().getArmy() < player.getUnitInterface().getArmy()) {
                                 tower.makeMove(move);
-                                sb.append(tower.getFLAG() + " attacks player " + opponent.getTower().getFLAG() + x + " " + y);
+                                sb.append(tower.getFLAG() + " attacks player " + opponent.getTower().getFLAG() + "point (" + x + ", " + y + ")");
                             }
                         }
                         isEnd = true;
