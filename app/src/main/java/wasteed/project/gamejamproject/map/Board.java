@@ -20,7 +20,7 @@ public class Board implements ServerBoard, IsInteractive {
     // стороннний класс для сражения
     private final Battle battleInterface;
     // индекс текущего игрока
-    private int current;
+    private int  current;
 
     public Board(Pair config, ArrayList<Player> players, Battle battleInterface) {
         this.config = config;
