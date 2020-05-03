@@ -21,6 +21,10 @@ public class PlayerSolver {
     }
 
     public void makeMove(Player player) {
+        UnitInterface unit = player.getUnitInterface();
+        unit.setPeople(unit.getPeople() + 10);
+        unit.setArmy(unit.getArmy() + 10);
+        unit.setMoney(unit.getMoney() + 10);
         Tower tower = player.getTower();
         ArrayList<Cell> territory = tower.getTerritory();
         Collections.shuffle(territory);
