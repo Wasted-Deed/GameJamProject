@@ -10,7 +10,10 @@ import wasteed.project.gamejamproject.IsInteractive;
 import wasteed.project.gamejamproject.Player;
 import wasteed.project.gamejamproject.PlayerSolver;
 import wasteed.project.gamejamproject.map.Board;
+import wasteed.project.gamejamproject.map.Cell;
 import wasteed.project.gamejamproject.map.Flag;
+import wasteed.project.gamejamproject.map.Move;
+import wasteed.project.gamejamproject.map.MoveType;
 import wasteed.project.gamejamproject.map.Pair;
 
 public class GameField implements IsInteractive {
@@ -81,7 +84,20 @@ public class GameField implements IsInteractive {
     }
 
     private void solveHero() {
-
+        int x = (int) ThreadSolver.TOUCH.getX();
+        int y = (int) ThreadSolver.TOUCH.getY();
+        x /= 54;
+        y = y - 400;
+        y /= 60;
+        if (ThreadSolver.IS_TOUCHING) {
+            Cell[][] cs = map.getCells();
+            if (x >= 0 && x < cs.length &&
+                    y >= 0 && y < cs[0].length) {
+                map.makeMove(new Move(x, y, MoveType.Take), hero.getTower());
+                hasFinished = true;
+                //if (map.getTower())
+            }
+        }
     }
 
     private boolean isBitmapTouched(Bitmap b, Vector2 pos) {
@@ -100,6 +116,7 @@ public class GameField implements IsInteractive {
                     solver.makeMove(player);
                 }
             }
+
             hasFinished = false;
         } else {
             solveHero();
