@@ -35,6 +35,8 @@ public class Tower {
 
     // присоединить клетку
     void join(Cell cell) {
+        cell.setState(CellState.Taken);
+        cell.setOwner(this);
         territory.add(cell);
     }
 
@@ -46,7 +48,7 @@ public class Tower {
     // сделать ход с проверкой под себя
     public void makeMove(Move move) {
         check(move.getX(), move.getY());
-        board.makeMove(move);
+        board.makeMove(move, this);
     }
 
     private void check(int x, int y) {

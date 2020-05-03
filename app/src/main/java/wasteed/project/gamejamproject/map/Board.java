@@ -13,14 +13,12 @@ import wasteed.project.gamejamproject.Player;
 public class Board implements ServerBoard, IsInteractive {
     // карта
     private final Cell[][] cells;
-    // башни игроков
-    private ArrayList<Tower> towers;
     // конфигурация доски
     private final Pair config;
     // стороннний класс для сражения
     private final Battle battleInterface;
     // индекс текущего игрока
-    private int current;
+    private Tower current;
 
     public Board(Pair config, ArrayList<Player> players, Battle battleInterface) {
         this.config = config;
@@ -30,11 +28,10 @@ public class Board implements ServerBoard, IsInteractive {
         fill();
         // иницализация начальной расстановки башен
         setTowers(players);
-        current = 0;
+        current = null;
     }
 
     private void setTowers(ArrayList<Player> players) {
-        towers = new ArrayList<>(players.size());
         Random random = new Random();
         int step = config.getX() / players.size();
         int lay = 0;
@@ -44,7 +41,6 @@ public class Board implements ServerBoard, IsInteractive {
             int y = random.nextInt(config.getX());
             cells[x][y] = new Cell(CellState.Taken, null, x, y);
             Tower tower = new Tower(this, cells[x][y], player);
-            towers.add(tower);
             player.setTower(tower);
         }
     }
@@ -68,35 +64,38 @@ public class Board implements ServerBoard, IsInteractive {
     // забрать клетку
     @Override
     public void takeCell(int x, int y) {
-        cells[x][y].setState(CellState.Taken);
-        cells[x][y].setOwner(currentTower());
         currentTower().join(cells[x][y]);
-
     }
 
     // поборотся за клетку
     @Override
     public void fightCell(int x, int y) {
-        cells[x][y].setOwner(battleInterface.fight(currentTower().getOwner(), getTower(x, y).getOwner(), x, y).getTower());
+        Tower defender = getTower(x, y);
+        Tower winner = battleInterface.fight(current.getOwner(), defender.getOwner(), x, y).getTower();
+        if (winner.equals(current)) {
+            defender.lose(cells[x][y]);
+            winner.join(cells[x][y]);
+        }
     }
 
     // просрать клетку
     @Override
-    public void loseCell(int x, int y, int playerNumber) {
+    public void loseCell(int x, int y, Tower tower) {
         cells[x][y].setState(CellState.Empty);
         cells[x][y].setOwner(null);
-        towers.get(playerNumber).lose(cells[x][y]);
+        tower.lose(cells[x][y]);
     }
 
     // башня текущего игрока
     @Override
     public Tower currentTower() {
-        return towers.get(current);
+        return current;
     }
 
     // сделать ход
     @Override
-    public void makeMove(Move move) {
+    public void makeMove(Move move, Tower tower) {
+        current = tower;
         if (!isValid(move)) {
             throw new IllegalArgumentException();
             // TODO: 02.05.2020 CustomException
@@ -106,12 +105,6 @@ public class Board implements ServerBoard, IsInteractive {
         } else {
             takeCell(move.getX(), move.getY());
         }
-        next();
-    }
-
-    // передать ход следующему игроку
-    public void next() {
-        current = (current + 1) % towers.size();
     }
 
     // начальная инициализация поля
