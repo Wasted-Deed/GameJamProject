@@ -9,6 +9,8 @@ public interface ServerBoard extends ClientBoard {
 
     Tower currentTower();
 
+    Pair getConfig();
+
     void loseCell(int x, int y, int playerNumber);
 
     void next();
