@@ -2,6 +2,7 @@ package wasteed.project.gamejamproject.maintenance;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 
@@ -29,6 +30,7 @@ public class GameField implements IsInteractive {
     private Player hero;
     private boolean hasFinished;
     private boolean hasEarnedPoints;
+    private boolean isComplete;
 
     public GameField(int MAP_X, int MAP_Y) {
         this.MAP_X = MAP_X;
@@ -38,6 +40,7 @@ public class GameField implements IsInteractive {
         CURRENT_PROGRESS = 0;
         hasFinished = true;
         hasEarnedPoints = false;
+        isComplete = false;
         message = "";
         generateBasicSituation();
     }
@@ -86,7 +89,8 @@ public class GameField implements IsInteractive {
         }
         Paint p = new Paint();
         p.setTextSize(40);
-        canvas.drawText(message, 0, ThreadSolver.SCREEN_HEIGHT - 200, p);
+        p.setColor(Color.WHITE);
+        canvas.drawText(message, 0, ThreadSolver.SCREEN_HEIGHT - 280, p);
     }
 
     private void solveHero() {
@@ -98,18 +102,22 @@ public class GameField implements IsInteractive {
         x /= 54;
         y = y - 400;
         y /= 60;
-        if (ThreadSolver.IS_TOUCHING) {
+        if (ThreadSolver.IS_TOUCHING && !isComplete) {
             Cell[][] cs = map.getCells();
             if (x >= 0 && x < cs.length &&
                     y >= 0 && y < cs[0].length) {
                 if (cs[x][y].getTower() == null) {
                     map.makeMove(new Move(x, y, MoveType.Take), hero.getTower());
-                    hasFinished = true;
                 } else if (cs[x][y].getTower().getFLAG() != hero.getTower().getFLAG()) {
                     map.makeMove(new Move(x, y, MoveType.Fight), hero.getTower());
-                    hasFinished = true;
                 }
                 //if (map.getTower())
+                isComplete = true;
+            }
+        } else if (!ThreadSolver.IS_TOUCHING) {
+            if (isComplete) {
+                hasFinished = true;
+                isComplete = false;
             }
         }
     }
@@ -127,10 +135,13 @@ public class GameField implements IsInteractive {
             CURRENT_PROGRESS++;
             for (Player player : players) {
                 if (player.getmType() != Player.Type.HERO) {
-                    solver.makeMove(player);
+                    message += solver.makeMove(player);
+                    message += "\n";
                 }
             }
-
+            if (CURRENT_PROGRESS % 6 == 0) {
+                message = "";
+            }
             hasFinished = false;
             hasEarnedPoints = false;
         } else {
