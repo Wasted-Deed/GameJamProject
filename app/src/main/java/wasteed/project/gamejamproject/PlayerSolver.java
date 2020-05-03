@@ -15,7 +15,7 @@ public class PlayerSolver {
     private ArrayList<Player> players;
     ClientBoard board;
 
-    PlayerSolver(ArrayList<Player> players, ClientBoard board) {
+    public PlayerSolver(ArrayList<Player> players, ClientBoard board) {
         this.players = players;
         this.board = board;
     }

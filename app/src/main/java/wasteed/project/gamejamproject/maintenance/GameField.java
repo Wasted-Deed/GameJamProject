@@ -3,20 +3,19 @@ package wasteed.project.gamejamproject.maintenance;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.Paint;
 
 import java.util.ArrayList;
 
 import wasteed.project.gamejamproject.IsInteractive;
 import wasteed.project.gamejamproject.Player;
+import wasteed.project.gamejamproject.PlayerSolver;
 import wasteed.project.gamejamproject.map.Board;
-import wasteed.project.gamejamproject.map.Cell;
 import wasteed.project.gamejamproject.map.Flag;
 import wasteed.project.gamejamproject.map.Pair;
 
 public class GameField implements IsInteractive {
     public static int CURRENT_PROGRESS;
-
+    private PlayerSolver solver;
     private Board map;
 
     private final int MAP_X;
@@ -33,13 +32,16 @@ public class GameField implements IsInteractive {
         players = new ArrayList<>();
         hero = new Player();
         CURRENT_PROGRESS = 0;
-        hasFinished = false;
+        hasFinished = true;
         generateBasicSituation();
     }
 
     private void generateBasicSituation() {
         players.add(hero);
+        players.add(new Player());
+        players.add(new Player());
         map = new Board(new Pair(MAP_X, MAP_Y), players, null);
+        solver = new PlayerSolver(players, map);
     }
 
     @Override
@@ -83,7 +85,8 @@ public class GameField implements IsInteractive {
             CURRENT_PROGRESS++;
             for (Player player : players) {
                 if (!player.equals(hero)) {
-                    //PlayerSolver.makeMove(player);
+                    solver.makeMove(player);
+                    System.out.println("Move done");
                 }
             }
             hasFinished = false;
