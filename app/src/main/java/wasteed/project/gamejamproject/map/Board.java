@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import java.util.ArrayList;
 import java.util.Random;
 
+import wasteed.project.gamejamproject.BattleInterface;
 import wasteed.project.gamejamproject.IsInteractive;
 import wasteed.project.gamejamproject.Player;
 
@@ -21,10 +22,10 @@ public class Board implements ServerBoard, IsInteractive {
   
     private Tower current;
 
-    public Board(Pair config, ArrayList<Player> players, Battle battleInterface) {
+    public Board(Pair config, ArrayList<Player> players) {
         this.config = config;
         this.cells = new Cell[config.getX()][config.getY()];
-        this.battleInterface = battleInterface;
+        this.battleInterface = new BattleInterface();
         // инициализация поля пустыми клетками
         fill();
         // иницализация начальной расстановки башен
