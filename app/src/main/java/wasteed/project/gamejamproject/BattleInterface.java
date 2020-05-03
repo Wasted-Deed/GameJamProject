@@ -9,7 +9,8 @@ public class BattleInterface implements Battle {
     }
 
     public Player fight(Player attacker, Player defender, int x, int y) {
-        if (attacker.getUnitInterface().getMoney() > 25) {
+        if (attacker.getUnitInterface().getMoney() > 25
+                && attacker.getUnitInterface().getArmy() >= defender.getUnitInterface().getArmy()) {
             attacker.getUnitInterface().setMoney(attacker.getUnitInterface().getMoney() - 25);
             attacker.getUnitInterface().setArmy(attacker.getUnitInterface().getArmy() +
                     defender.getUnitInterface().getArmy() / 10);
