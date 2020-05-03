@@ -20,7 +20,7 @@ public class PlayerSolver {
         this.board = board;
     }
 
-    public void makeMove(Player player) {
+    public String makeMove(Player player) {
         UnitInterface unit = player.getUnitInterface();
         unit.setPeople(unit.getPeople() + 10);
         unit.setArmy(unit.getArmy() + 10);
@@ -28,14 +28,10 @@ public class PlayerSolver {
         Tower tower = player.getTower();
         ArrayList<Cell> territory = tower.getTerritory();
         Collections.shuffle(territory);
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < territory.size(); ++i) {
             int xs = territory.get(i).getX();
             int ys = territory.get(i).getY();
-            //ArrayList<Pair> dd = new ArrayList<>();
-            /*dd.add(new Pair(1, 0)); dd.add(new Pair(-1, 0));
-            dd.add(new Pair(0, 1)); dd.add(new Pair(0, -1));
-            dd.add(new Pair(1, 1)); dd.add(new Pair(-1, 1));
-            dd.add(new Pair(1, -1)); dd.add(new Pair(-1, -1));*/
             boolean isEnd = false;
             for (int j = -1; j <= 1; ++j) {
                 for (int h = -1; h <= 1; ++h) {
@@ -46,11 +42,12 @@ public class PlayerSolver {
                         if (board.getTower(x, y) == null) {
                             Move movef = new Move(x, y, MoveType.Take);
                             tower.makeMove(movef);
+                            sb.append(tower.getFLAG() + " take point" + x + " " + y);
                         } else {
                             Player opponent = board.getTower(x, y).getOwner();
                             if (opponent.getUnitInterface().getArmy() < player.getUnitInterface().getArmy()) {
                                 tower.makeMove(move);
-                                player.getUnitInterface().setArmy(player.getUnitInterface().getArmy() - opponent.getUnitInterface().getArmy());
+                                sb.append(tower.getFLAG() + " attacks player " + opponent.getTower().getFLAG() + x + " " + y);
                             }
                         }
                         isEnd = true;
@@ -65,7 +62,7 @@ public class PlayerSolver {
                 break;
             }
         }
-
+        return sb.toString();
 
     }
 
