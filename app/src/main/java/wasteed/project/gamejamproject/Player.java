@@ -6,6 +6,13 @@ import wasteed.project.gamejamproject.map.Move;
 import wasteed.project.gamejamproject.map.Tower;
 
 public class Player implements IsInteractive {
+    private Tower thisTower;
+    private UnitInterface unitInterface;
+
+    public Player() {
+        unitInterface = new UnitInterface();
+    }
+
     @Override
     public void draw(Canvas canvas) {
 
@@ -17,7 +24,7 @@ public class Player implements IsInteractive {
     }
 
     public void setTower(Tower tower) {
-
+        thisTower = tower;
     }
 
     public void makeMove(Move move) {
@@ -25,6 +32,10 @@ public class Player implements IsInteractive {
     }
 
     public Tower getTower() {
-        return null;
+        return thisTower;
+    }
+
+    public UnitInterface getUnitInterface() {
+        return unitInterface;
     }
 }
