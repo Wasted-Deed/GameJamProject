@@ -13,7 +13,8 @@ public class ResourceLoader {
 
     public enum Image {
         MONEY, ARMY, PEOPLE,
-        CELL_GRAY, CELL_GREEN, CELL_RED, CELL_BLUE
+        CELL_GRAY, CELL_GREEN, CELL_RED, CELL_BLUE,
+        BUTTON_ATTACK, BUTTON_ALLIE
     }
 
     public static void loadResources(Resources resources) {
@@ -34,6 +35,10 @@ public class ResourceLoader {
                 R.drawable.cell_red, options));
         resourceMap.put(Image.CELL_BLUE, BitmapFactory.decodeResource(resources,
                 R.drawable.cell_blue, options));
+        resourceMap.put(Image.BUTTON_ATTACK, BitmapFactory.decodeResource(resources,
+                R.drawable.boy, options));
+        resourceMap.put(Image.BUTTON_ALLIE, BitmapFactory.decodeResource(resources,
+                R.drawable.diplomat, options));
     }
 
     public static Bitmap getBitmap(Image image) {

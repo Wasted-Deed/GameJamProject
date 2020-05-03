@@ -71,6 +71,7 @@ public class Board implements ServerBoard, IsInteractive {
         cells[x][y].setState(CellState.Taken);
         cells[x][y].setOwner(currentTower());
         currentTower().join(cells[x][y]);
+
     }
 
     // поборотся за клетку

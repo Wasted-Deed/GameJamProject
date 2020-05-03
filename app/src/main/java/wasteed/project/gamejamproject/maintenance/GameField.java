@@ -79,6 +79,13 @@ public class GameField implements IsInteractive {
 
     }
 
+    private boolean isBitmapTouched(Bitmap b, Vector2 pos) {
+        float x = ThreadSolver.TOUCH.getX();
+        float y = ThreadSolver.TOUCH.getY();
+        return x >= pos.getX() && x <= pos.getX() + b.getWidth() &&
+                y >= pos.getY() && y <= pos.getY() + b.getHeight();
+    }
+
     @Override
     public void update() {
         if (hasFinished) {

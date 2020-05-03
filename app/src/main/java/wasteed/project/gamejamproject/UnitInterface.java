@@ -16,6 +16,9 @@ public class UnitInterface implements IsInteractive {
     private Bitmap unitMoney;
     private Bitmap unitArmy;
     private Bitmap unitPeople;
+    private Bitmap buttonAttack;
+    private Bitmap buttonAllie;
+    private boolean isCellChosen;
 
     public UnitInterface() {
         this(75, 75, 75);
@@ -28,6 +31,9 @@ public class UnitInterface implements IsInteractive {
         unitMoney = ResourceLoader.getBitmap(ResourceLoader.Image.MONEY);
         unitArmy = ResourceLoader.getBitmap(ResourceLoader.Image.ARMY);
         unitPeople = ResourceLoader.getBitmap(ResourceLoader.Image.PEOPLE);
+        buttonAllie = ResourceLoader.getBitmap(ResourceLoader.Image.BUTTON_ALLIE);
+        buttonAttack = ResourceLoader.getBitmap(ResourceLoader.Image.BUTTON_ATTACK);
+        isCellChosen = false;
     }
 
     @Override
@@ -47,6 +53,15 @@ public class UnitInterface implements IsInteractive {
         canvas.drawBitmap(unitPeople, m, null);
         canvas.drawText(String.valueOf(getPeople()), ThreadSolver.SCREEN_WIDTH - 200,
                 300, p);
+        if (isCellChosen) {
+            int height = ThreadSolver.SCREEN_HEIGHT;
+            int imgH = buttonAllie.getHeight();
+            int imgW = buttonAllie.getWidth();
+            m.setTranslate(0, height - imgH);
+            canvas.drawBitmap(buttonAllie, m, null);
+            m.setTranslate(ThreadSolver.SCREEN_WIDTH - imgW, height - imgH);
+            canvas.drawBitmap(buttonAttack, m, null);
+        }
     }
 
     @Override
