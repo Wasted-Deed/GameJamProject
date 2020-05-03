@@ -3,6 +3,7 @@ package wasteed.project.gamejamproject.maintenance;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 
 import java.util.ArrayList;
 
@@ -24,9 +25,7 @@ public class GameField implements IsInteractive {
     private ArrayList<Player> players;
     private Player hero;
     private boolean hasFinished;
-    private Bitmap heroMoney;
-    private Bitmap heroArmy;
-    private Bitmap heroPeople;
+
 
     public GameField(int MAP_X, int MAP_Y) {
         this.MAP_X = MAP_X;
@@ -35,9 +34,6 @@ public class GameField implements IsInteractive {
         hero = new Player();
         CURRENT_PROGRESS = 0;
         hasFinished = false;
-        heroMoney = ResourceLoader.getBitmap(ResourceLoader.Image.MONEY);
-        heroArmy = ResourceLoader.getBitmap(ResourceLoader.Image.ARMY);
-        heroPeople = ResourceLoader.getBitmap(ResourceLoader.Image.PEOPLE);
         generateBasicSituation();
     }
 
@@ -49,19 +45,13 @@ public class GameField implements IsInteractive {
     @Override
     public void draw(Canvas canvas) {
         Matrix m = new Matrix();
-        m.setTranslate(0, 0);
-        canvas.drawBitmap(heroMoney, m, null);
-        m.setTranslate(ThreadSolver.SCREEN_WIDTH / 2 - 100, 0);
-        canvas.drawBitmap(heroArmy, m, null);
-        m.setTranslate(ThreadSolver.SCREEN_WIDTH - 200, 0);
-        canvas.drawBitmap(heroPeople, m, null);
-        Cell[][] cells = map.getCells();
-        int stepY = 200;
+        hero.getUnitInterface().draw(canvas);
+        int stepY = 400;
         for (int i = 0; i < MAP_X; i++) {
             for (int j = 0; j < MAP_Y; j++) {
                 Bitmap cell;
                 //if (i % 2 == 0) //{
-                    m.setTranslate(i * 54, stepY + j * 60);
+                m.setTranslate(i * 54, stepY + j * 60);
                 //} else {
                 //  m.setTranslate(i * 54 + 27, stepY + j * 60);
                 //}

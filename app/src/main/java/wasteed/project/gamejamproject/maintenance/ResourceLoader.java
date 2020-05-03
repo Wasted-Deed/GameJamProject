@@ -11,7 +11,7 @@ import wasteed.project.gamejamproject.R;
 public class ResourceLoader {
     private static HashMap<Image, Bitmap> resourceMap;
 
-    enum Image {
+    public enum Image {
         MONEY, ARMY, PEOPLE,
         CELL_GRAY, CELL_GREEN, CELL_RED, CELL_BLUE
     }
