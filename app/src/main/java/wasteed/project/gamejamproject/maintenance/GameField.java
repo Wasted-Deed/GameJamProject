@@ -6,7 +6,6 @@ import android.graphics.Matrix;
 
 import java.util.ArrayList;
 
-import wasteed.project.gamejamproject.BattleInterface;
 import wasteed.project.gamejamproject.IsInteractive;
 import wasteed.project.gamejamproject.Player;
 import wasteed.project.gamejamproject.PlayerSolver;
@@ -28,7 +27,7 @@ public class GameField implements IsInteractive {
     private ArrayList<Player> players;
     private Player hero;
     private boolean hasFinished;
-
+    private boolean hasEarnedPoints;
 
     public GameField(int MAP_X, int MAP_Y) {
         this.MAP_X = MAP_X;
@@ -37,6 +36,7 @@ public class GameField implements IsInteractive {
         hero = new Player();
         CURRENT_PROGRESS = 0;
         hasFinished = true;
+        hasEarnedPoints = false;
         generateBasicSituation();
     }
 
@@ -87,6 +87,9 @@ public class GameField implements IsInteractive {
     private void solveHero() {
         int x = (int) ThreadSolver.TOUCH.getX();
         int y = (int) ThreadSolver.TOUCH.getY();
+        if (!hasEarnedPoints && ThreadSolver.IS_TOUCHING) {
+            hasEarnedPoints = hero.getUnitInterface().toGain(x, y);
+        }
         x /= 54;
         y = y - 400;
         y /= 60;
@@ -119,6 +122,7 @@ public class GameField implements IsInteractive {
             }
 
             hasFinished = false;
+            hasEarnedPoints = false;
         } else {
             solveHero();
         }

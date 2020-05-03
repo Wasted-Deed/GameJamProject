@@ -69,6 +69,25 @@ public class UnitInterface implements IsInteractive {
 
     }
 
+    public boolean toGain(int x, int y) {
+        if (y <= unitArmy.getHeight()) {
+            if (x <= unitMoney.getWidth()) {
+                money += 20;
+                return true;
+            }
+            if (x >= ThreadSolver.SCREEN_WIDTH / 2 - unitArmy.getWidth() / 2 &&
+                    x <= ThreadSolver.SCREEN_WIDTH / 2 + unitArmy.getWidth() / 2) {
+                army += 20;
+                return true;
+            }
+            if (x >= ThreadSolver.SCREEN_WIDTH - unitPeople.getWidth()) {
+                people += 20;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getArmy() {
         return army;
     }
@@ -93,4 +112,15 @@ public class UnitInterface implements IsInteractive {
         this.people = people;
     }
 
+    public Bitmap getUnitMoney() {
+        return unitMoney;
+    }
+
+    public Bitmap getUnitArmy() {
+        return unitArmy;
+    }
+
+    public Bitmap getUnitPeople() {
+        return unitPeople;
+    }
 }

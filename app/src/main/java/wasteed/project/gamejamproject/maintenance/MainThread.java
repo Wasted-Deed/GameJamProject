@@ -11,7 +11,7 @@ public class MainThread extends Thread {
     private boolean isRunning;
 
     static {
-        MAX_FPS = 32;
+        MAX_FPS = 64;
         targetTime = 1000_000_000 / MAX_FPS;
     }
 
