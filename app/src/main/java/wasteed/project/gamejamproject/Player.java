@@ -9,6 +9,7 @@ public class Player implements IsInteractive {
     private Tower thisTower;
     private UnitInterface unitInterface;
     private Type mType;
+    private String name;
 
     public enum Type {
         HERO, DIPLOMAT, FIGHTER, PEOPLE

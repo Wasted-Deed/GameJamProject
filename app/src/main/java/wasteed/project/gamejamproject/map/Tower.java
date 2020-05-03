@@ -86,4 +86,5 @@ public class Tower {
     public ArrayList<Cell> getTerritory() {
         return territory;
     }
+
 }
