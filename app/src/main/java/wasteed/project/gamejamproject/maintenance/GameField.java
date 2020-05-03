@@ -6,7 +6,6 @@ import android.graphics.Matrix;
 
 import java.util.ArrayList;
 
-import wasteed.project.gamejamproject.BattleInterface;
 import wasteed.project.gamejamproject.IsInteractive;
 import wasteed.project.gamejamproject.Player;
 import wasteed.project.gamejamproject.PlayerSolver;
@@ -88,6 +87,9 @@ public class GameField implements IsInteractive {
     private void solveHero() {
         int x = (int) ThreadSolver.TOUCH.getX();
         int y = (int) ThreadSolver.TOUCH.getY();
+        if (!hasEarnedPoints) {
+            hasEarnedPoints = hero.getUnitInterface().toGain(x, y);
+        }
         x /= 54;
         y = y - 400;
         y /= 60;
