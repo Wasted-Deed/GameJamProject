@@ -3,7 +3,6 @@ package wasteed.project.gamejamproject;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import wasteed.project.gamejamproject.map.Board;
 import wasteed.project.gamejamproject.map.Cell;
 import wasteed.project.gamejamproject.map.ClientBoard;
 import wasteed.project.gamejamproject.map.Move;
@@ -44,9 +43,9 @@ public class PlayerSolver {
                         board.makeMove(movef);
                     } else {
                         Player opponent = board.getTower(x, y).getOwner();
-                        if (opponent.getArmy() < player.getArmy()) {
+                        if (opponent.getUnitInterface().getArmy() < player.getUnitInterface().getArmy()) {
                             board.makeMove(move);
-                            player.setArmy(player.getArmy() - opponent.getArmy());
+                            player.getUnitInterface().setArmy(player.getUnitInterface().getArmy() - opponent.getUnitInterface().getArmy());
                             isEnd = true;
                             break;
                         }
