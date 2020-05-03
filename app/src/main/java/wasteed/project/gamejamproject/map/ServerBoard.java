@@ -11,7 +11,5 @@ public interface ServerBoard extends ClientBoard {
 
     Pair getConfig();
 
-    void loseCell(int x, int y, int playerNumber);
-
-    void next();
+    void loseCell(int x, int y, Tower tower);
 }

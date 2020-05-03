@@ -1,7 +1,7 @@
 package wasteed.project.gamejamproject.map;
 
 public interface ClientBoard {
-    void makeMove(Move move);
+    void makeMove(Move move, Tower tower);
 
     boolean isValid(Move move);
 
