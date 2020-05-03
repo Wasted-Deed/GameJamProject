@@ -50,7 +50,7 @@ public class GameField implements IsInteractive {
         dip = new Player();
         dip.setmType(Player.Type.FIGHTER);
         players.add(dip);
-        map = new Board(new Pair(MAP_X, MAP_Y), players, new BattleInterface());
+        map = new Board(new Pair(MAP_X, MAP_Y), players);
         solver = new PlayerSolver(players, map);
     }
 
