@@ -4,7 +4,7 @@ import wasteed.project.gamejamproject.map.Battle;
 
 public class BattleInterface implements Battle {
 
-    BattleInterface() {
+    public BattleInterface() {
 
     }
 

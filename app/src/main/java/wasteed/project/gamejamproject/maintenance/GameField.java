@@ -6,6 +6,7 @@ import android.graphics.Matrix;
 
 import java.util.ArrayList;
 
+import wasteed.project.gamejamproject.BattleInterface;
 import wasteed.project.gamejamproject.IsInteractive;
 import wasteed.project.gamejamproject.Player;
 import wasteed.project.gamejamproject.PlayerSolver;
@@ -48,7 +49,7 @@ public class GameField implements IsInteractive {
         dip = new Player();
         dip.setmType(Player.Type.FIGHTER);
         players.add(dip);
-        map = new Board(new Pair(MAP_X, MAP_Y), players, null);
+        map = new Board(new Pair(MAP_X, MAP_Y), players, new BattleInterface());
         solver = new PlayerSolver(players, map);
     }
 
