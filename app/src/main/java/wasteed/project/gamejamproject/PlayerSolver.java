@@ -27,7 +27,7 @@ public class PlayerSolver {
         for (int i = 0; i < territory.size(); ++i) {
             int xs = territory.get(i).getX();
             int ys = territory.get(i).getY();
-            ArrayList<Pair> dd = new ArrayList<>();
+            //ArrayList<Pair> dd = new ArrayList<>();
             /*dd.add(new Pair(1, 0)); dd.add(new Pair(-1, 0));
             dd.add(new Pair(0, 1)); dd.add(new Pair(0, -1));
             dd.add(new Pair(1, 1)); dd.add(new Pair(-1, 1));
@@ -47,7 +47,6 @@ public class PlayerSolver {
                             if (opponent.getUnitInterface().getArmy() < player.getUnitInterface().getArmy()) {
                                 tower.makeMove(move);
                                 player.getUnitInterface().setArmy(player.getUnitInterface().getArmy() - opponent.getUnitInterface().getArmy());
-
                             }
                         }
                         isEnd = true;
