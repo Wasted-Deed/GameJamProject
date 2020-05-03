@@ -3,6 +3,7 @@ package wasteed.project.gamejamproject.maintenance;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
 
 import java.util.ArrayList;
 
@@ -23,8 +24,8 @@ public class GameField implements IsInteractive {
 
     private final int MAP_X;
     private final int MAP_Y;
-
     private ArrayList<Player> players;
+    String message;
     private Player hero;
     private boolean hasFinished;
     private boolean hasEarnedPoints;
@@ -37,6 +38,7 @@ public class GameField implements IsInteractive {
         CURRENT_PROGRESS = 0;
         hasFinished = true;
         hasEarnedPoints = false;
+        message = "";
         generateBasicSituation();
     }
 
@@ -82,6 +84,9 @@ public class GameField implements IsInteractive {
                 canvas.drawBitmap(cell, m, null);
             }
         }
+        Paint p = new Paint();
+        p.setTextSize(40);
+        canvas.drawText(message, 0, ThreadSolver.SCREEN_HEIGHT - 200, p);
     }
 
     private void solveHero() {
@@ -96,9 +101,14 @@ public class GameField implements IsInteractive {
         if (ThreadSolver.IS_TOUCHING) {
             Cell[][] cs = map.getCells();
             if (x >= 0 && x < cs.length &&
-                    y >= 0 && y < cs[0].length && cs[x][y].getTower() == null) {
-                map.makeMove(new Move(x, y, MoveType.Take), hero.getTower());
-                hasFinished = true;
+                    y >= 0 && y < cs[0].length) {
+                if (cs[x][y].getTower() == null) {
+                    map.makeMove(new Move(x, y, MoveType.Take), hero.getTower());
+                    hasFinished = true;
+                } else if (cs[x][y].getTower().getFLAG() != hero.getTower().getFLAG()) {
+                    map.makeMove(new Move(x, y, MoveType.Fight), hero.getTower());
+                    hasFinished = true;
+                }
                 //if (map.getTower())
             }
         }
