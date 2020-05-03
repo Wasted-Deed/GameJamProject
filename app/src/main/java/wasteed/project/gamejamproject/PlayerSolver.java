@@ -28,28 +28,33 @@ public class PlayerSolver {
             int xs = territory.get(i).getX();
             int ys = territory.get(i).getY();
             ArrayList<Pair> dd = new ArrayList<>();
-            dd.add(new Pair(1, 0));
-            dd.add(new Pair(-1, 0));
-            dd.add(new Pair(0, 1));
-            dd.add(new Pair(0, -1));
+            /*dd.add(new Pair(1, 0)); dd.add(new Pair(-1, 0));
+            dd.add(new Pair(0, 1)); dd.add(new Pair(0, -1));
+            dd.add(new Pair(1, 1)); dd.add(new Pair(-1, 1));
+            dd.add(new Pair(1, -1)); dd.add(new Pair(-1, -1));*/
             boolean isEnd = false;
-            for (int j = 0; j < dd.size(); ++j) {
-                int x = xs + dd.get(j).getX();
-                int y = ys + dd.get(j).getY();
-                Move move = new Move(x, y, MoveType.Fight);
-                if (tower.isValid(x, y) && board.getTower(x, y) != tower) {
-                    if (board.getTower(x, y) == null) {
-                        Move movef = new Move(x, y, MoveType.Take);
-                        tower.makeMove(movef);
-                    } else {
-                        Player opponent = board.getTower(x, y).getOwner();
-                        if (opponent.getUnitInterface().getArmy() < player.getUnitInterface().getArmy()) {
-                            tower.makeMove(move);
-                            player.getUnitInterface().setArmy(player.getUnitInterface().getArmy() - opponent.getUnitInterface().getArmy());
+            for (int j = -1; j <= 1; ++j) {
+                for (int h = -1; h <= 1; ++h) {
+                    int x = xs + h;
+                    int y = ys + j;
+                    Move move = new Move(x, y, MoveType.Fight);
+                    if (tower.isValid(x, y) && board.getTower(x, y) != tower) {
+                        if (board.getTower(x, y) == null) {
+                            Move movef = new Move(x, y, MoveType.Take);
+                            tower.makeMove(movef);
+                        } else {
+                            Player opponent = board.getTower(x, y).getOwner();
+                            if (opponent.getUnitInterface().getArmy() < player.getUnitInterface().getArmy()) {
+                                tower.makeMove(move);
+                                player.getUnitInterface().setArmy(player.getUnitInterface().getArmy() - opponent.getUnitInterface().getArmy());
 
+                            }
                         }
+                        isEnd = true;
+                        break;
                     }
-                    isEnd = true;
+                }
+                if (isEnd) {
                     break;
                 }
             }
