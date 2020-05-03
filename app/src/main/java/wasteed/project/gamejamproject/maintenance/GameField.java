@@ -38,8 +38,13 @@ public class GameField implements IsInteractive {
 
     private void generateBasicSituation() {
         players.add(hero);
-        players.add(new Player());
-        players.add(new Player());
+        hero.setmType(Player.Type.HERO);
+        Player dip = new Player();
+        dip.setmType(Player.Type.DIPLOMAT);
+        players.add(dip);
+        dip = new Player();
+        dip.setmType(Player.Type.FIGHTER);
+        players.add(dip);
         map = new Board(new Pair(MAP_X, MAP_Y), players, null);
         solver = new PlayerSolver(players, map);
     }
@@ -91,9 +96,8 @@ public class GameField implements IsInteractive {
         if (hasFinished) {
             CURRENT_PROGRESS++;
             for (Player player : players) {
-                if (!player.equals(hero)) {
+                if (player.getmType() != Player.Type.HERO) {
                     solver.makeMove(player);
-                    System.out.println("Move done");
                 }
             }
             hasFinished = false;

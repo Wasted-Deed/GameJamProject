@@ -8,6 +8,11 @@ import wasteed.project.gamejamproject.map.Tower;
 public class Player implements IsInteractive {
     private Tower thisTower;
     private UnitInterface unitInterface;
+    private Type mType;
+
+    public enum Type {
+        HERO, DIPLOMAT, FIGHTER, PEOPLE
+    }
 
     public Player() {
         unitInterface = new UnitInterface();
@@ -29,6 +34,14 @@ public class Player implements IsInteractive {
 
     public void makeMove(Move move) {
 
+    }
+
+    public Type getmType() {
+        return mType;
+    }
+
+    public void setmType(Type mType) {
+        this.mType = mType;
     }
 
     public Tower getTower() {

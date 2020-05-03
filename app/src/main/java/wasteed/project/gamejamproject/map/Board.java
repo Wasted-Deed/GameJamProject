@@ -18,6 +18,7 @@ public class Board implements ServerBoard, IsInteractive {
     // стороннний класс для сражения
     private final Battle battleInterface;
     // индекс текущего игрока
+  
     private Tower current;
 
     public Board(Pair config, ArrayList<Player> players, Battle battleInterface) {
