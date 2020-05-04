@@ -67,7 +67,7 @@ public class GameField implements IsInteractive {
             for (int j = 0; j < MAP_Y; j++) {
                 Bitmap cell;
                 //if (i % 2 == 0) //{
-                m.setTranslate(i * 54, stepY + j * 60);
+                m.setTranslate(i * 50 + (j % 2 == 0 ? 25 : 0), stepY + j * 50);
                 //} else {
                 //  m.setTranslate(i * 54 + 27, stepY + j * 60);
                 //}
@@ -99,9 +99,9 @@ public class GameField implements IsInteractive {
         if (!hasEarnedPoints && ThreadSolver.IS_TOUCHING) {
             hasEarnedPoints = hero.getUnitInterface().toGain(x, y);
         }
-        x /= 54;
+        x /= 50;
         y = y - 400;
-        y /= 60;
+        y /= 50;
         if (ThreadSolver.IS_TOUCHING && !isComplete) {
             Cell[][] cs = map.getCells();
             if (x >= 0 && x < cs.length &&
