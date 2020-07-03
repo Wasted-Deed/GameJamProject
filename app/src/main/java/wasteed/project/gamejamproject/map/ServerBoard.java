@@ -9,7 +9,7 @@ public interface ServerBoard extends ClientBoard {
 
     Tower currentTower();
 
-    Pair getConfig();
+    MyPair getConfig();
 
     void loseCell(int x, int y, Tower tower);
 }

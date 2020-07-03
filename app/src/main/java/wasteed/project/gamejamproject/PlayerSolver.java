@@ -7,7 +7,6 @@ import wasteed.project.gamejamproject.map.Cell;
 import wasteed.project.gamejamproject.map.ClientBoard;
 import wasteed.project.gamejamproject.map.Move;
 import wasteed.project.gamejamproject.map.MoveType;
-import wasteed.project.gamejamproject.map.Pair;
 import wasteed.project.gamejamproject.map.Tower;
 
 public class PlayerSolver {
@@ -22,9 +21,9 @@ public class PlayerSolver {
 
     public String makeMove(Player player) {
         UnitInterface unit = player.getUnitInterface();
-        unit.setPeople(unit.getPeople() + 5);
-        unit.setArmy(unit.getArmy() + 5);
-        unit.setMoney(unit.getMoney() + 5);
+        unit.setMoney(unit.getMoney() + unit.getPeople() / 10);
+        unit.setPeople(unit.getPeople() + 10);
+        unit.setArmy(unit.getArmy() + 10);
         Tower tower = player.getTower();
         if (player.getmType() == Player.Type.DIPLOMAT) {
             return dimplomat(tower);

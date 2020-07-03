@@ -5,7 +5,7 @@ public interface ClientBoard {
 
     boolean isValid(Move move);
 
-    Pair getConfig();
+    MyPair getConfig();
 
     Tower getTower(int x, int y);
 }

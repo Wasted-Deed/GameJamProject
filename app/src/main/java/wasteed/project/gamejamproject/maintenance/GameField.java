@@ -16,7 +16,7 @@ import wasteed.project.gamejamproject.map.Cell;
 import wasteed.project.gamejamproject.map.Flag;
 import wasteed.project.gamejamproject.map.Move;
 import wasteed.project.gamejamproject.map.MoveType;
-import wasteed.project.gamejamproject.map.Pair;
+import wasteed.project.gamejamproject.map.MyPair;
 
 public class GameField implements IsInteractive {
     public static int CURRENT_PROGRESS;
@@ -31,6 +31,7 @@ public class GameField implements IsInteractive {
     private boolean hasFinished;
     private boolean hasEarnedPoints;
     private boolean isComplete;
+    private boolean isFirstHeroUpdate; //TODO delete
 
     public GameField(int MAP_X, int MAP_Y) {
         this.MAP_X = MAP_X;
@@ -54,7 +55,7 @@ public class GameField implements IsInteractive {
         dip = new Player();
         dip.setmType(Player.Type.FIGHTER);
         players.add(dip);
-        map = new Board(new Pair(MAP_X, MAP_Y), players);
+        map = new Board(new MyPair(MAP_X, MAP_Y), players);
         solver = new PlayerSolver(players, map);
     }
 
@@ -131,7 +132,9 @@ public class GameField implements IsInteractive {
 
     @Override
     public void update() {
+
         if (hasFinished) {
+            isFirstHeroUpdate = true;
             CURRENT_PROGRESS++;
             for (Player player : players) {
                 if (player.getmType() != Player.Type.HERO) {
@@ -146,6 +149,10 @@ public class GameField implements IsInteractive {
             hasFinished = false;
             hasEarnedPoints = false;
         } else {
+            if (isFirstHeroUpdate) {
+                isFirstHeroUpdate = false;
+                hero.getUnitInterface().updateResources();
+            }
             solveHero();
         }
     }

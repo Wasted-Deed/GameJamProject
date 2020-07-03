@@ -123,4 +123,8 @@ public class UnitInterface implements IsInteractive {
     public Bitmap getUnitPeople() {
         return unitPeople;
     }
+
+    public void updateResources() {
+        money += people / 10;
+    }
 }

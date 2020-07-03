@@ -59,7 +59,7 @@ public class Tower {
     }
 
     public boolean isValid(int x, int y) {
-        Pair siz = board.getConfig();
+        MyPair siz = board.getConfig();
         return x >= 0 && x < siz.getX() && y >= 0 && y < siz.getY();
     }
 

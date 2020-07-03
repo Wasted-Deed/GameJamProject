@@ -1,5 +1,7 @@
 package wasteed.project.gamejamproject;
 
+import androidx.core.util.Pair;
+
 import wasteed.project.gamejamproject.map.Battle;
 
 public class BattleInterface implements Battle {
@@ -9,7 +11,7 @@ public class BattleInterface implements Battle {
     }
 
     public Player fight(Player attacker, Player defender, int x, int y) {
-        if (attacker.getUnitInterface().getMoney() > 25
+        if (attacker.getUnitInterface().getMoney() > 0
                 && attacker.getUnitInterface().getArmy() >= defender.getUnitInterface().getArmy()) {
             attacker.getUnitInterface().setMoney(attacker.getUnitInterface().getMoney() - 25);
             attacker.getUnitInterface().setArmy(attacker.getUnitInterface().getArmy() +
@@ -24,6 +26,14 @@ public class BattleInterface implements Battle {
             return attacker;
         } else {
             return defender;
+        }
+    }
+
+    public Pair<Boolean, String> take(Player attacker, int x, int y) {
+        if (attacker.getUnitInterface().getMoney() > 0) {
+            return new Pair<>(true, "");
+        } else {
+            return new Pair<>(false, "Not enough money!");
         }
     }
 }
