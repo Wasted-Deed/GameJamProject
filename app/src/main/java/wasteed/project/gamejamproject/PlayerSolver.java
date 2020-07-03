@@ -96,6 +96,7 @@ public class PlayerSolver {
                             tower.makeMove(move);
                             sb.append(tower.getFLAG() + " attacks player " + opponent.getTower().getFLAG() + "point (" + x + ", " + y + ")");
                             return sb.toString();
+
                         }
                     }
                 }

@@ -139,6 +139,7 @@ public class GameField implements IsInteractive {
                     message += "\n";
                 }
             }
+
             if (CURRENT_PROGRESS % 3 == 0) {
                 message = "";
             }
