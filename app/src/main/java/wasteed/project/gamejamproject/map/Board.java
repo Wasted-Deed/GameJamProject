@@ -2,6 +2,9 @@ package wasteed.project.gamejamproject.map;
 
 import android.graphics.Canvas;
 
+
+import androidx.core.util.Pair;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,14 +18,14 @@ public class Board implements ServerBoard, IsInteractive {
     // карта
     private final Cell[][] cells;
     // конфигурация доски
-    private final Pair config;
+    private final MyPair config;
     // стороннний класс для сражения
     private final Battle battleInterface;
     // индекс текущего игрока
   
     private Tower current;
 
-    public Board(Pair config, ArrayList<Player> players) {
+    public Board(MyPair config, ArrayList<Player> players) {
         this.config = config;
         this.cells = new Cell[config.getX()][config.getY()];
         this.battleInterface = new BattleInterface();
@@ -66,7 +69,12 @@ public class Board implements ServerBoard, IsInteractive {
     // забрать клетку
     @Override
     public void takeCell(int x, int y) {
-        currentTower().join(cells[x][y]);
+        Pair<Boolean, String> result = battleInterface.take(current.getOwner(), x, y);
+        if (result.first) {
+            currentTower().join(cells[x][y]);
+        } else {
+            // TODO result.second display.
+        }
     }
 
     // поборотся за клетку
@@ -140,7 +148,7 @@ public class Board implements ServerBoard, IsInteractive {
     }
 
     @Override
-    public Pair getConfig() {
+    public MyPair getConfig() {
         return config;
     }
 }

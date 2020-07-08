@@ -1,10 +1,10 @@
 package wasteed.project.gamejamproject.map;
 
-public class Pair {
+public class MyPair {
     private final int x;
     private final int y;
 
-    public Pair(int x, int y) {
+    public MyPair(int x, int y) {
         this.x = x;
         this.y = y;
     }
